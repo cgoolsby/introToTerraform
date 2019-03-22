@@ -1,8 +1,8 @@
 variable "access" {
-  default = "AKIAJCJETRBBQR4WFRBQ"
+  default = "AWS_ID"
 }
 variable "secret" {
-  default = "0xvRm+VzYyuC1ygnnR+UGYFD+3hN8B1uORZPUDx+"
+  default = "AWS_KEY"
 }
 
 output "access" {
