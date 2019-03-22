@@ -9,4 +9,5 @@ Dockerfile    - This Dockerfile has the correct configuration for terraform 0.11
 
 Directions:
 1) Fill in secrets.tf
-2) run the command docker build -t my_images:terraformTutorial -f Dockerfile .
+2) run the command:
+docker build --build-arg AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID --build-arg AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY-t my_images:terraformTutorial -f Dockerfile .
