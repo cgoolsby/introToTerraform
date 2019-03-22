@@ -1,0 +1,12 @@
+This folder gets you set up to utilize a docker container with the respective levels.
+
+
+Files in this folder:
+secrets.tf    - NOTE: The .gitignore file should include this file EVERY TIME.  Otherwise you will push your secret keys to github!!!!
+Dockerfile    - This Dockerfile has the correct configuration for terraform 0.11.3 and will copy your secrets.tf in order to 'carry' it with you.  NOTE: THIS IS NOT A SECURE BEST PRACTICE and other more cumbersome workflows should be used in production.
+
+
+
+Directions:
+1) Fill in secrets.tf
+2) run the command docker build -t my_images:terraformTutorial -f Dockerfile .
