@@ -1,6 +1,5 @@
-provider "http" {}
 provider "aws" {
-  region = "us-west-2"#TD
+  region = "us-west-2"
 }
 
 resource "aws_vpc" "EXAMPLE-vpc" {
@@ -90,3 +89,7 @@ resource "aws_security_group_rule" "totallyOpenOUT"{
   security_group_id = "${aws_security_group.TotallyOpen.id}"
 }
 data "aws_availability_zones" "available" {}
+
+output "ip_of_instance" {
+  value = "${aws_instance.web.public_ip}"
+}

@@ -1,15 +1,13 @@
-provider "http" {}
 provider "aws" {
-  region = "us-west-2"#TD
+  region = "us-west-2"
 }
 
 resource "aws_vpc" "EXAMPLE-vpc" {
   cidr_block = "10.0.0.0/16"
-  enable_dns_hostnames = true
 }
 
 resource "aws_instance" "web" {
-  count = 1
+  count = 3
 
   instance_type = "t2.micro"
   ami           = "${data.aws_ami.ubuntu.id}"

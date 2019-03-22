@@ -1,4 +1,3 @@
-provider "http" {}
 provider "aws" {
   region = "us-west-2"#TD
 }
@@ -48,7 +47,7 @@ resource "aws_subnet" "public" {
   cidr_block = "10.0.${count.index}.0/24"
   map_public_ip_on_launch = true
   tags {
-    Name = "Public Subnet-[count.index}"
+    Name = "Public Subnet-[count.index]"
   }
 }
 
