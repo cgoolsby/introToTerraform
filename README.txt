@@ -8,4 +8,4 @@ The requirements are:
 3) A Pemkey downloaded from AWS console in your ~/.ssh/ folder
 
 In order to deploy a level in AWS use the command:
-docker run -it -v $(pwd):/tmp -rm my_images:terraformTutorial /bin/sh
+docker run --rm -it -v $(pwd):/tmp  my_images:terraformTutorial /bin/sh

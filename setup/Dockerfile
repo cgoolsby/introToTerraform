@@ -12,5 +12,7 @@ RUN git clone https://github.com/hashicorp/terraform.git ./ && \
     git checkout v${TERRAFORM_VERSION} && \
     /bin/bash scripts/build.sh
 
-COPY secrets.tf /tmp
+RUN mkdir /SECRETS
+WORKDIR /SECRETS
+COPY secrets.tf .
 WORKDIR /tmp
