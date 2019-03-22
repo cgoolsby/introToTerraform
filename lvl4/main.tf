@@ -1,11 +1,6 @@
 provider "http" {}
-module "secrets" {
-  source = "/SECRETS/"
-}
 provider "aws" {
   region = "us-west-2"#TD
-  access_key = "${module.secrets.access}"
-  secret_key = "${module.secrets.secret}"
 }
 
 resource "aws_vpc" "EXAMPLE-vpc" {

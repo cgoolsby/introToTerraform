@@ -1,8 +1,6 @@
 provider "http" {}
 provider "aws" {
   region = "us-west-2"#TD
-  access_key = "${var.access}"
-  secret_key = "${var.secret}"
 }
 
 resource "aws_vpc" "EXAMPLE-vpc" {
