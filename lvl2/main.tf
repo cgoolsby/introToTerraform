@@ -7,7 +7,7 @@ resource "aws_vpc" "EXAMPLE-vpc" {
 }
 
 resource "aws_instance" "web" {
-  count = 3
+  count = 1
 
   instance_type = "t2.micro"
   ami           = "${data.aws_ami.ubuntu.id}"

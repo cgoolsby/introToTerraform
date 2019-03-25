@@ -1,6 +1,7 @@
 Hello,
 
 Here you will find an introduction to utilizing terraform on AWS for Insight DO Fellows.
+Please clap the accompanying Medium Article : LINK
 
 The requirements are:
 1) Docker
