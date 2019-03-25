@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "us-west-2"#TD
+  region = "us-west-1"
 }
 
 resource "aws_vpc" "EXAMPLE-vpc" {
@@ -43,7 +43,7 @@ resource "aws_internet_gateway" "igw" {
 resource "aws_subnet" "public" {
   count = "${var.count}"
   vpc_id = "${aws_vpc.EXAMPLE-vpc.id}"
-  availability_zone = "${data.aws_availability_zones.available.names[count.index]}"
+  availability_zone = "${data.aws_availability_zones.available.names[count.index % length(data.aws_availability_zones.available.names)]}"
   cidr_block = "10.0.${count.index}.0/24"
   map_public_ip_on_launch = true
   tags {
@@ -51,30 +51,21 @@ resource "aws_subnet" "public" {
   }
 }
 
-#resource "aws_route_table" "public-rt" {
-#  vpc_id = "${aws_vpc.EXAMPLE-vpc.id}"
-#  depends_on = ["aws_internet_gateway.igw"]
-#  tags {
-#    Name = "${terraform.workspace}-public-rt"
-#  }
-#}
-#resource "aws_route" "intoInstance" {
-#  route_table_id = "${aws_route_table.public-rt.id}"
-#  depends_on = ["aws_route_table.public-rt"]
-#  destination_cidr_block = "0.0.0.0/0"
-#  gateway_id = "${aws_internet_gateway.igw.id}"
-#}
-#resource "aws_route_table_association" "public-rt" {
-#  subnet_id = "${aws_subnet.public.id}"
-#  route_table_id = "${aws_route_table.public-rt.id}"
-#}
 resource "aws_route_table" "public" {
   vpc_id       = "${aws_vpc.EXAMPLE-vpc.id}"
-
+  depends_on = ["aws_internet_gateway.igw"]
   route {
     cidr_block = "0.0.0.0/0"
     gateway_id = "${aws_internet_gateway.igw.id}"
   }
+  tags = {
+    name = "route all"
+  }
+}
+resource "aws_route_table_association" "a" {
+  count = "${length(data.aws_availability_zones.available.names)}"
+  subnet_id      = "${element(aws_subnet.public.*.id, count.index)}"
+  route_table_id = "${aws_route_table.public.id}"
 }
 resource "aws_security_group" "TotallyOpen" {
   vpc_id = "${aws_vpc.EXAMPLE-vpc.id}"
@@ -97,3 +88,7 @@ resource "aws_security_group_rule" "totallyOpenOUT"{
   security_group_id = "${aws_security_group.TotallyOpen.id}"
 }
 data "aws_availability_zones" "available" {}
+
+output "IPs" {
+  value = "${aws_instance.web.*.public_ip}"
+}
