@@ -1,5 +1,6 @@
-#Run With : spark-submit --packages org.apache.hadoop:hadoop-aws:2.7.1 --master spark://52.11.208.189:7077  pySparkSubmit.py
+#Run With : spark-submit --packages org.apache.hadoop:hadoop-aws:2.7.1 --master spark://<MASTER_IP>:7077  pySparkSubmit.py
 #Credit : https://www.cloudera.com/documentation/enterprise/5-14-x/topics/spark_s3.html
+#Observe at <MASTER_IP>:8080
 
 from pyspark import SparkContext
 sc =SparkContext()
