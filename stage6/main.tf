@@ -26,8 +26,8 @@ module "route_tables" {
   Public_Subnet_id_list = "${module.subnets.public_subnet_ids}"
   Private_Subnet_id_list = "${module.subnets.private_subnet_ids}"
 }
-module "EC2" {
-  source = "./modules/EC2/"
+module "spark_EC2" {
+  source = "./modules/spark_EC2/"
   extraEC2count = "4"
   aws_instance_type = "m4.large"
   public_subnet_id = "${module.subnets.public_subnet_ids[0]}"
