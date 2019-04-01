@@ -37,5 +37,5 @@ module "spark_EC2" {
 }
 
 output "Ips" {
-  value = "${module.EC2.ips}"
+  value = "${module.spark_EC2.ips}"
 }
